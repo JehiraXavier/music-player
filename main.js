@@ -16,20 +16,20 @@ let track_index = 0;
 let is_playing = false;
 let update_timer;
 
-let current_track = document.createElement('audio');
+let current_track = document.createElement("audio");
 
 let track_list = [
   {
     name: "On Top of the World",
     artist: "Imagine Dragons",
     image: "./images/On_Top_Of_The_World.jpg",
-    path: "./audio/On_Top_Of_The_World.mp3"
+    path: "./audio/On_Top_Of_The_World.mp3",
   },
   {
     name: "Baila Baila Baila",
     artist: "Ozuna",
     image: "./images/Baila_Baila_Baila.png",
-    path: "./audio/Baila_Baila_Baila.mp3"
+    path: "./audio/Baila_Baila_Baila.mp3",
   },
   {
     name: "I'm Good (Blue)",
@@ -83,10 +83,12 @@ function load_track(track_index) {
   current_track.src = track_list[track_index].path;
   current_track.load();
 
-  track_cover.style.backgroundImage = "url(" + track_list[track_index].image + ")";
+  track_cover.style.backgroundImage =
+    "url(" + track_list[track_index].image + ")";
   track_name.textContent = track_list[track_index].name;
   track_artist.textContent = track_list[track_index].artist;
-  now_playing.textContent = "PLAYING " + (track_index + 1) + " OF " + track_list.length;
+  now_playing.textContent =
+    "PLAYING " + (track_index + 1) + " OF " + track_list.length;
 
   update_timer = setInterval(seekUpdate, 1000);
   current_track.addEventListener("ended", next_track);
@@ -115,20 +117,18 @@ function play_track() {
 function pause_track() {
   current_track.pause();
   is_playing = false;
-  play_pause_button.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';;
+  play_pause_button.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';
 }
 
 function next_track() {
-  if (track_index < track_list.length - 1)
-    track_index += 1;
+  if (track_index < track_list.length - 1) track_index += 1;
   else track_index = 0;
   load_track(track_index);
   play_track();
 }
 
 function prev_track() {
-  if (track_index > 0)
-    track_index -= 1;
+  if (track_index > 0) track_index -= 1;
   else track_index = track_list.length;
   load_track(track_index);
   play_track();
@@ -152,18 +152,28 @@ function seekUpdate() {
     seek_slider.value = seekPosition;
 
     let current_minutes = Math.floor(current_track.currentTime / 60);
-    let current_seconds = Math.floor(current_track.currentTime - current_minutes * 60);
+    let current_seconds = Math.floor(
+      current_track.currentTime - current_minutes * 60
+    );
     let duration_minutes = Math.floor(current_track.duration / 60);
-    let duration_seconds = Math.floor(current_track.duration - duration_minutes * 60);
+    let duration_seconds = Math.floor(
+      current_track.duration - duration_minutes * 60
+    );
 
-    if (current_seconds < 10) { current_seconds = "0" + current_seconds; }
-    if (duration_seconds < 10) { duration_seconds = "0" + duration_seconds; }
-    if (current_minutes < 10) { current_minutes = "0" + current_minutes; }
-    if (duration_minutes < 10) { duration_minutes = "0" + duration_minutes; }
+    if (current_seconds < 10) {
+      current_seconds = "0" + current_seconds;
+    }
+    if (duration_seconds < 10) {
+      duration_seconds = "0" + duration_seconds;
+    }
+    if (current_minutes < 10) {
+      current_minutes = "0" + current_minutes;
+    }
+    if (duration_minutes < 10) {
+      duration_minutes = "0" + duration_minutes;
+    }
 
     current_time.textContent = current_minutes + ":" + current_seconds;
     total_duration.textContent = duration_minutes + ":" + duration_seconds;
   }
 }
-
-
