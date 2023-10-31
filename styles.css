@@ -23,7 +23,7 @@ body {
   margin: 25px;
   height: 250px;
   width: 250px;
-  background-image: url("././images/bg.jpg");
+  background-image: url("./assests/images/bg.jpg");
   background-size: cover;
   border-radius: 15%;
 }
